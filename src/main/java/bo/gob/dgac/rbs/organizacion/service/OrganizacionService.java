@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
-import bo.gob.dgac.rbs.organizacion.dto.UbicacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.mapper.OrganizacionMapper;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
-import bo.gob.dgac.rbs.organizacion.modelo.Ubicacion;
 import bo.gob.dgac.rbs.organizacion.repository.OrganizacionRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
