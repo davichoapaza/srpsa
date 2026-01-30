@@ -3,6 +3,7 @@ package bo.gob.dgac.rbs.organizacion.modelo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -110,6 +111,9 @@ public class Organizacion {
     @OneToMany(mappedBy="organizacion", cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Aeronaves> aeronaves;
     
+    
+    @OneToMany(mappedBy="organizacion", cascade = CascadeType.ALL , orphanRemoval = true)
+    private List<Objetivos> objetivos;
     
     
     

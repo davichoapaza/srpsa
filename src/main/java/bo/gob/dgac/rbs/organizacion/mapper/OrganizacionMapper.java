@@ -21,6 +21,9 @@ import bo.gob.dgac.rbs.organizacion.modelo.ParamTamanoOrganizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamTipoOrganizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.Ubicacion;
 
+
+
+
 @Mapper(componentModel = "spring")
 public interface OrganizacionMapper {
 
@@ -115,7 +118,7 @@ public interface OrganizacionMapper {
     AeronaveDTO toDto(Aeronaves entity);
     
     @AfterMapping
-    default void linkUbicaciones(@MappingTarget Organizacion org) {
+    default void ubicaciones(@MappingTarget Organizacion org) {
         if (org.getUbicaciones() != null) {
             for (Ubicacion u : org.getUbicaciones()) {
                 u.setOrganizacion(org);
@@ -124,7 +127,7 @@ public interface OrganizacionMapper {
     }
     
     @AfterMapping
-    default void linkAeronaves(@MappingTarget Organizacion org) {
+    default void aeronaves(@MappingTarget Organizacion org) {
       if(org.getAeronaves()!=null) {
     	  for(Aeronaves a:org.getAeronaves()) {
     		 a.setOrganizacion(org);  
@@ -133,6 +136,24 @@ public interface OrganizacionMapper {
     }
     
     
+    
+    /*
+    @AfterMapping 
+    default void objetivos(@MappingTarget Organizacion org) {
+      if(org.getObjetivos()!=null) {
+    	  for(Objetivos o:org.getObjetivos()) {
+    		  o.setOrganizacion(org);
+    	  }
+      }   
+    		
+    }*/
+    
+    
+    
+    
+    
+    
+      
     
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "organizacion", ignore = true)

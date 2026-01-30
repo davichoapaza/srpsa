@@ -2,6 +2,7 @@ package bo.gob.dgac.rbs.organizacion.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+
 import bo.gob.dgac.rbs.organizacion.dto.UbicacionDTO;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamDepartamento;

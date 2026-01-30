@@ -3,6 +3,8 @@ package bo.gob.dgac.rbs.organizacion.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import bo.gob.dgac.rbs.organizacion.modelo.Metas;
+
 public class OrganizacionCreacionDto {
 
     public String nombreOrganizacion;
@@ -33,6 +35,11 @@ public class OrganizacionCreacionDto {
 
     public List<AeronaveDTO> aeronaves;
     
+   /* para adicionar objetivos y metas en la primera (todo en uno )
+    * public List<ObjetivosDto> objetivos;
+    
+    public List<Metas> metas;
+    */
     
     
 }

@@ -4,10 +4,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import bo.gob.dgac.rbs.organizacion.dto.IndicadorDto;
+import bo.gob.dgac.rbs.organizacion.dto.MetaDto;
+import bo.gob.dgac.rbs.organizacion.dto.ObjetivosDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
+import bo.gob.dgac.rbs.organizacion.dto.OrganizacionResponseDto;
 import bo.gob.dgac.rbs.organizacion.mapper.OrganizacionMapper;
+import bo.gob.dgac.rbs.organizacion.modelo.Indicador;
+import bo.gob.dgac.rbs.organizacion.modelo.Metas;
+import bo.gob.dgac.rbs.organizacion.modelo.Objetivos;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.repository.OrganizacionRepository;
 import lombok.RequiredArgsConstructor;
@@ -94,6 +101,64 @@ public class OrganizacionService  {
         return repository.save(entity);
     }
     
+
+    public OrganizacionResponseDto obtenerArbol(Long organizacionId) {
+
+        Organizacion org = repository.findArbolById(organizacionId)
+                .orElseThrow(() -> new RuntimeException("No existe organización"));
+
+        OrganizacionResponseDto dto = new OrganizacionResponseDto();
+        
+        dto.id=org.getId();
+        dto.nombreOrganizacion=org.getNombreOrganizacion();
+
+        for (Objetivos o : org.getObjetivos()) {
+
+            ObjetivosDto oDto = new ObjetivosDto();
+            
+            //oDto.id = o.getId();
+            oDto.nombre= o.getNombre();
+            oDto.descripcion= o.getDescripcion();
+
+            for (Metas m : o.getMetas()) {
+
+                MetaDto mDto = new MetaDto();
+                //mDto.setId(m.getId());
+                mDto.setNombre(m.getNombre());
+                mDto.setDescripcion(m.getDescripcion());
+
+                for (Indicador i : m.getIndicador()) {
+
+                    IndicadorDto iDto = new IndicadorDto();
+                    //iDto.setId(i.getId());
+                    
+                    iDto.periodicidadId=i.getPeriodicidad().getId();
+                    iDto.formula=iDto.getFormula();
+                    iDto.nivelAlerta1=iDto.getNivelAlerta1();
+                    iDto.nivelAlerta2=iDto.getNivelAlerta2();
+                    iDto.nivelAlerta3= iDto.getNivelAlerta3();
+
+                    if (i.getTipoIndicador() != null) {
+                        
+                        iDto.TipoIndicadorId=i.getTipoIndicador().getId();
+                        //iDto.setTipoIndicadorNombre(i.getTipoIndicador().getNombreIndicador());
+                        
+                    }
+
+                    mDto.getIndicadores().add(iDto);
+                }
+
+                oDto.metas.add(mDto);
+            }
+
+//            dto.getObjetivos().add(oDto);
+            dto.objetivos.add(oDto);
+        }
+
+        return dto;
+    }
+    
+     
 }
 
 /*

@@ -1,10 +1,14 @@
 package bo.gob.dgac.rbs.organizacion.dto;
 
+import java.util.List;
+
 import lombok.Data;
 
-@Data
+
 public class ObjetivosDto {
-	private Long id;
-	private String nombre;
+	
+	public String nombre;
+	public String descripcion;
+	public List<MetaDto> metas;
 	 	
 }

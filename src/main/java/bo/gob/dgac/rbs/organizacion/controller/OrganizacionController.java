@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
+import bo.gob.dgac.rbs.organizacion.dto.OrganizacionResponseDto;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.service.OrganizacionService;
 import lombok.RequiredArgsConstructor;
@@ -51,6 +52,11 @@ public class OrganizacionController {
     	return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
     			"id",creado.getId(),
     			"mensaje","La organizacion fue creada correctament"));
+    }
+    
+    @GetMapping("/objetivos/{id}")
+    public ResponseEntity<OrganizacionResponseDto> obtenerObjetivos(@PathVariable Long id) {
+        return ResponseEntity.ok(service.obtenerArbol(id));
     }
     
     /*@PostMapping
