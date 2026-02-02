@@ -4,17 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import bo.gob.dgac.rbs.organizacion.dto.IndicadorDto;
-import bo.gob.dgac.rbs.organizacion.dto.MetaDto;
-import bo.gob.dgac.rbs.organizacion.dto.ObjetivosDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
-import bo.gob.dgac.rbs.organizacion.dto.OrganizacionResponseDto;
 import bo.gob.dgac.rbs.organizacion.mapper.OrganizacionMapper;
-import bo.gob.dgac.rbs.organizacion.modelo.Indicador;
-import bo.gob.dgac.rbs.organizacion.modelo.Metas;
-import bo.gob.dgac.rbs.organizacion.modelo.Objetivos;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.repository.OrganizacionRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,13 +46,15 @@ public class OrganizacionService  {
         return mapper.toDto(repository.save(entity));
     }
     
+    
+    /*
     public OrganizacionDetalleDTO obtenerConUbicaciones(Long id) {
 
         Organizacion org = repository.findByIdConUbicaciones(id)
                 .orElseThrow(() -> new RuntimeException("No encontrada"));
 
         return mapper.toDetalleDto(org);
-    }
+    }*/
    
     /*@Transactional
     public Organizacion crear(OrganizacionCreacionDto dto) {
@@ -96,12 +91,14 @@ public class OrganizacionService  {
     }*/
     
     //@Transactional
-    public Organizacion crear(OrganizacionCreacionDto dto) {
+   public Organizacion crear(OrganizacionCreacionDto dto) {
+	   
+	   
         Organizacion entity = mapper.toEntity(dto);
         return repository.save(entity);
     }
     
-
+/*
     public OrganizacionResponseDto obtenerArbol(Long organizacionId) {
 
         Organizacion org = repository.findArbolById(organizacionId)
@@ -156,7 +153,7 @@ public class OrganizacionService  {
         }
 
         return dto;
-    }
+    }*/
     
      
 }

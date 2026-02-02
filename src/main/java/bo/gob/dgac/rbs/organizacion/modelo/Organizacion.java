@@ -2,6 +2,7 @@ package bo.gob.dgac.rbs.organizacion.modelo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -114,6 +115,14 @@ public class Organizacion {
     
     @OneToMany(mappedBy="organizacion", cascade = CascadeType.ALL , orphanRemoval = true)
     private List<Objetivos> objetivos;
+    
+    
+//    @OneToMany(mappedBy="organizacion", cascade = CascadeType.ALL, orphanRemoval = true)
+ //   private List<TipoOperacion> tipoOperacion;
+    
+    @OneToMany(mappedBy="organizacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TipoOperacion> tipoOperacion = new ArrayList<>();
+// Con esto, aunque no llegue nada, getTipoOperacion() devuelve lista vacía y no revienta.
     
     
     

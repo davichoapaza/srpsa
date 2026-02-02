@@ -36,7 +36,7 @@ public class ParamTipoOperacionService {
                 })
                 .orElseThrow(() ->
                         new RuntimeException(
-                                "Tipo de operación no encontrado con id: " + id));
+                                "Tipo  no encontrado con id: " + id));
     }
 
     public void eliminar(Long id) {

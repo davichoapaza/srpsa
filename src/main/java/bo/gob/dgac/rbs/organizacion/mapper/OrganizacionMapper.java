@@ -10,6 +10,7 @@ import bo.gob.dgac.rbs.organizacion.dto.AeronaveDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
+import bo.gob.dgac.rbs.organizacion.dto.TipoOperacionItemDto;
 import bo.gob.dgac.rbs.organizacion.dto.UbicacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.modelo.Aeronaves;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
@@ -19,7 +20,9 @@ import bo.gob.dgac.rbs.organizacion.modelo.ParamDepartamento;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamNacionalidad;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamTamanoOrganizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamTipoOrganizacion;
+import bo.gob.dgac.rbs.organizacion.modelo.TipoOperacion;
 import bo.gob.dgac.rbs.organizacion.modelo.Ubicacion;
+
 
 
 
@@ -104,23 +107,29 @@ public interface OrganizacionMapper {
     @Mapping(target = "nacionalidad", source = "paramNacionalidadId", qualifiedByName = "mapNacionalidad")
     @Mapping(target = "tamanoOrganizacion", source = "paramTamanoOrganizacionId", qualifiedByName = "mapTamano")
     @Mapping(target = "complejidadOrganizacion", source = "paramComplejidadOrganizacionId", qualifiedByName = "mapComplejidad")
+	@Mapping(target = "tipoOperacion", source = "tipos")
     Organizacion toEntity(OrganizacionCreacionDto dto);
 
-    //   el eixto de una persona tener la liberdad de hacer sin consultar 
-    /*@Mapping(target = "id", ignore = true)
-    @Mapping(target = "organizacion", ignore = true)
-    @Mapping(target = "fechaRegistro", ignore = true) 
-    Ubicacion toEntity(UbicacionCreacionDto dto);*/
-    
-    
-    Aeronaves toEntity(AeronaveDTO dto);
-    
-    AeronaveDTO toDto(Aeronaves entity);
-    
+	 @AfterMapping
+   default void operacion(@MappingTarget Organizacion org) {
+   		for(TipoOperacion t: org.getTipoOperacion()) {
+   			t.setOrganizacion(org);
+   		}
+
+   }
+	 @Named("mapOrganizacion")
+	    default Organizacion mapOrganizacion(Long id) {
+	        if (id == null) return null;
+	        Organizacion o = new Organizacion();
+	        o.setId(id);
+	        return o;
+	 }
+	
     @AfterMapping
     default void ubicaciones(@MappingTarget Organizacion org) {
         if (org.getUbicaciones() != null) {
             for (Ubicacion u : org.getUbicaciones()) {
+            	System.out.println("Ubicacion  ");
                 u.setOrganizacion(org);
             }
         }
@@ -130,6 +139,8 @@ public interface OrganizacionMapper {
     default void aeronaves(@MappingTarget Organizacion org) {
       if(org.getAeronaves()!=null) {
     	  for(Aeronaves a:org.getAeronaves()) {
+    		  System.out.println("aeronaves ");
+    		  
     		 a.setOrganizacion(org);  
     	  }
       } 	

@@ -50,18 +50,18 @@ public class ObjetivosService {
     			if(mDto.indicadores!=null) {
     				for(IndicadorDto iDto: mDto.indicadores) {
     				 Indicador ind= new Indicador();
-    				 ind.setNombre(iDto.getNombre());
+    				 ind.setNombre(iDto.nombre);
     				 ParamTipoIndicador pti= new ParamTipoIndicador();
-    				 pti.setId(iDto.getPeriodicidadId());
+    				 pti.setId(iDto.TipoIndicadorId);
     				 ind.setTipoIndicador(pti);
     				 ParamPeriodicidad per= new ParamPeriodicidad();
-    				 per.setId(iDto.getPeriodicidadId());
+    				 per.setId(iDto.periodicidadId);
     				 ind.setPeriodicidad(per); 
     				 ind.setMetas(meta);
-    				 ind.setFormulaIndicador(iDto.getFormula());
-    				 ind.setNivelAlertaUno(iDto.getNivelAlerta1());
-    				 ind.setNivelAlertaDos(iDto.getNivelAlerta2());
-    				 ind.setNivelAlertaTres(iDto.getNivelAlerta3());
+    				 ind.setFormulaIndicador(iDto.formula);
+    				 ind.setNivelAlertaUno(iDto.nivelAlerta1);
+    				 ind.setNivelAlertaDos(iDto.nivelAlerta2);
+    				 ind.setNivelAlertaTres(iDto.nivelAlerta3);
     				 indicadorServide.save(ind);
     				}
     			}

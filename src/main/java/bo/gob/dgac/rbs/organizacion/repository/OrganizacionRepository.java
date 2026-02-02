@@ -12,7 +12,7 @@ import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 @Repository
 public interface OrganizacionRepository extends JpaRepository<Organizacion, Long> {
 	
-	
+	/*
 	 @Query("""
 			  select distinct o
 			    from Organizacion o
@@ -21,7 +21,7 @@ public interface OrganizacionRepository extends JpaRepository<Organizacion, Long
 			    left join fetch m.indicador i
 			    where o.id = :id
 			    """)
-	Optional<Organizacion> findArbolById(@Param("id") Long id);
+	Optional<Organizacion> findArbolById(@Param("id") Long id);*/
 	
 	
 	 /*@Query("""
@@ -34,14 +34,14 @@ public interface OrganizacionRepository extends JpaRepository<Organizacion, Long
     List<Indicador> findByMetaIdsWithTipo(@Param("metaIds") List<Long> metaIds);
 }*/
 	 
-	@Query("""
+/*	@Query("""
 		    SELECT o FROM Organizacion o
 		    LEFT JOIN FETCH o.ubicaciones u
 		    WHERE o.id = :id
  """)
 	Optional<Organizacion> findByIdConUbicaciones(Long id);
 
-	
+	*/
 	
 	
 	

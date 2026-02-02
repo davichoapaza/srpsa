@@ -34,12 +34,13 @@ public class OrganizacionCreacionDto {
     public List<UbicacionCreacionDto> ubicaciones;
 
     public List<AeronaveDTO> aeronaves;
+
+    public List<TipoOperacionItemDto> tipos;
+    
     
    /* para adicionar objetivos y metas en la primera (todo en uno )
     * public List<ObjetivosDto> objetivos;
     
     public List<Metas> metas;
     */
-    
-    
 }

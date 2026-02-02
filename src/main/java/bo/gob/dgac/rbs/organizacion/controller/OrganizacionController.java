@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
-import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
-import bo.gob.dgac.rbs.organizacion.dto.OrganizacionResponseDto;
+import bo.gob.dgac.rbs.organizacion.dto.TipoOperacionItemDto;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.service.OrganizacionService;
 import lombok.RequiredArgsConstructor;
@@ -47,18 +46,21 @@ public class OrganizacionController {
     
     @PostMapping
     public ResponseEntity<?>  crear(@RequestBody OrganizacionCreacionDto dto) {
-    	System.out.println("impresion de dto:"+dto.aeronaves);
+    	
+    	 
+    
+    	
     	Organizacion creado=service.crear(dto);
     	return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
     			"id",creado.getId(),
     			"mensaje","La organizacion fue creada correctament"));
     }
-    
+    /*
     @GetMapping("/objetivos/{id}")
     public ResponseEntity<OrganizacionResponseDto> obtenerObjetivos(@PathVariable Long id) {
         return ResponseEntity.ok(service.obtenerArbol(id));
     }
-    
+    */
     /*@PostMapping
     public ResponseEntity<?> crear(@RequestBody OrganizacionCreacionDto dto) {
         Organizacion creada = service.crear(dto);
@@ -75,11 +77,13 @@ public class OrganizacionController {
         return service.guardar(dto);
     }*/
 
+    
+    /*
     @GetMapping("/detalle/{id}")
     public OrganizacionDetalleDTO obtenerDetalle(@PathVariable Long id) {
         return service.obtenerConUbicaciones(id);
     }
-
+   */
     
     @PutMapping("/{id}")
     public OrganizacionDTO actualizar(@PathVariable Long id,

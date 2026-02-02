@@ -1,8 +1,5 @@
 package bo.gob.dgac.rbs.organizacion.dto;
 
-import lombok.Data;
-
-@Data
 public class IndicadorDto {
 
 	public Long TipoIndicadorId;
