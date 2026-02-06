@@ -16,7 +16,7 @@ public interface UbicacionMapper {
     @Mapping(source = "departamento.id", target = "departamentoId")
     UbicacionDTO toDto(Ubicacion entity);
 
-    @Mapping(target = "organizacion", source = "organizacionId", qualifiedByName = "mapOrganizacion")
+   // @Mapping(target = "organizacion", source = "organizacionId", qualifiedByName = "mapOrganizacion")
     @Mapping(target = "departamento", source = "departamentoId", qualifiedByName = "mapDepartamento")
     Ubicacion toEntity(UbicacionDTO dto);
 

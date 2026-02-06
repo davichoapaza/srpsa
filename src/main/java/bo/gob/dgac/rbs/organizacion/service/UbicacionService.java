@@ -1,12 +1,16 @@
 package bo.gob.dgac.rbs.organizacion.service;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import bo.gob.dgac.rbs.organizacion.dto.UbicacionDTO;
+import bo.gob.dgac.rbs.organizacion.dto.UbicacionRequestDto;
 import bo.gob.dgac.rbs.organizacion.mapper.UbicacionMapper;
+import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.Ubicacion;
 import bo.gob.dgac.rbs.organizacion.repository.UbicacionRepository;
+import lombok.RequiredArgsConstructor;
 
 
 @Service
@@ -34,6 +38,19 @@ public class UbicacionService {
         return mapper.toDto(
                 repository.save(mapper.toEntity(dto))
         );
+    }
+    
+    public UbicacionRequestDto guardar(UbicacionRequestDto dto) {
+    	Organizacion org=new Organizacion();
+    	org.setId(dto.organizacionId);
+    	for(UbicacionDTO ubic:dto.ubicacion) {
+    		Ubicacion entity= mapper.toEntity(ubic);
+    		entity.setOrganizacion(org);
+    		repository.save(entity);
+    	}
+    	return null;
+    	
+    	
     }
 
     

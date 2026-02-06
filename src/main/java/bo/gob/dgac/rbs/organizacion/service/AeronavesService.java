@@ -18,15 +18,14 @@ public class AeronavesService {
 	private final AeronavesRepository repository;
 	private final AeronaveMapper mapper;
 	
-	public void guardarAeronaves(AeronavesRequestDto request) {
+	public void guardarAeronaves(AeronavesRequestDto dto) {
 
 	    Organizacion org = new Organizacion();
-	    org.setId(request.organizacionId);
+	    org.setId(dto.organizacionId);
 
-	    for (AeronaveDTO dto : request.aeronaves) {
-	        Aeronaves entity = mapper.toEntity(dto);
+	    for (AeronaveDTO aero : dto.aeronaves) {
+	        Aeronaves entity = mapper.toEntity(aero);
 	        entity.setOrganizacion(org);
-
 	        repository.save(entity);
 	    }
 	}

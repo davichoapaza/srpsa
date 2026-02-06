@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bo.gob.dgac.rbs.organizacion.dto.UbicacionDTO;
+import bo.gob.dgac.rbs.organizacion.dto.UbicacionRequestDto;
 import bo.gob.dgac.rbs.organizacion.service.UbicacionService;
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +35,13 @@ public class UbicacionController {
     public UbicacionDTO crear(@RequestBody UbicacionDTO dto) {
         return service.guardar(dto);
     }
+    
+    @PostMapping
+    public UbicacionRequestDto crear(@RequestBody UbicacionRequestDto dto) {
+    	
+    	return service.guardar(dto);
+    }
+    
     @PutMapping("/{id}")
     public UbicacionDTO actualizar(@PathVariable Long id,
                                    @RequestBody UbicacionDTO dto) {
