@@ -28,10 +28,11 @@ public class OrganizacionController {
 
     private final OrganizacionService service;
 
-    /*OrganizacionController(ParamComplejidadOrganizacionController paramComplejidadOrganizacionController) {
-        this.paramComplejidadOrganizacionController = paramComplejidadOrganizacionController;
-    }*/
-
+    
+    @PostMapping
+    public OrganizacionDTO crear(@RequestBody OrganizacionDTO dto) {
+        return service.guardar(dto);
+    }
     @GetMapping
     public List<OrganizacionDTO> listar() {
         return service.listarTodos();
@@ -41,15 +42,19 @@ public class OrganizacionController {
     public OrganizacionDTO obtener(@PathVariable Long id) {
         return service.obtenerPorId(id);
     }
+    @PutMapping("/{id}")
+    public OrganizacionDTO actualizar(@PathVariable Long id,
+                                      @RequestBody OrganizacionDTO dto) {
+        return service.actualizar(id, dto);
+    }
 
-    
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<?>  crear(@RequestBody OrganizacionCreacionDto dto) {
     	Organizacion creado=service.crear(dto);
     	return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
     			"id",creado.getId(),
     			"mensaje","La organizacion fue creada correctament"));
-    }
+    }*/
     /*
     @GetMapping("/objetivos/{id}")
     public ResponseEntity<OrganizacionResponseDto> obtenerObjetivos(@PathVariable Long id) {
@@ -67,11 +72,7 @@ public class OrganizacionController {
     
     
     
-    /*@PostMapping
-    public OrganizacionDTO crear(@RequestBody OrganizacionDTO dto) {
-        return service.guardar(dto);
-    }*/
-
+    
     
     /*
     @GetMapping("/detalle/{id}")
@@ -80,11 +81,7 @@ public class OrganizacionController {
     }
    */
     
-    @PutMapping("/{id}")
-    public OrganizacionDTO actualizar(@PathVariable Long id,
-                                      @RequestBody OrganizacionDTO dto) {
-        return service.actualizar(id, dto);
-    }
+
 }
 
 

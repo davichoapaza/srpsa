@@ -18,6 +18,7 @@ public class OrganizacionService  {
     private final OrganizacionRepository repository;
     private final OrganizacionMapper mapper;
     
+    
     public List<OrganizacionDTO> listarTodos() {
         return repository.findAll()
                 .stream()
@@ -44,7 +45,11 @@ public class OrganizacionService  {
         entity.setId(id);
         return mapper.toDto(repository.save(entity));
     }
-    
+    /*
+    public Organizacion crear(OrganizacionCreacionDto dto) {
+ 	    Organizacion entity = mapper.toEntity(dto);
+        return repository.save(entity);
+    }*/
     
     /*
     public OrganizacionDetalleDTO obtenerConUbicaciones(Long id) {
@@ -90,13 +95,7 @@ public class OrganizacionService  {
     }*/
     
     //@Transactional
-   public Organizacion crear(OrganizacionCreacionDto dto) {
-	   
-	   
-        Organizacion entity = mapper.toEntity(dto);
-        return repository.save(entity);
-    }
-    
+   
 /*
     public OrganizacionResponseDto obtenerArbol(Long organizacionId) {
 

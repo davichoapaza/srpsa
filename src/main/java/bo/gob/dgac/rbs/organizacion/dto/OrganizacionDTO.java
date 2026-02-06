@@ -15,16 +15,13 @@ public class OrganizacionDTO {
     private Long nacionalidadId;
     private Long tamanoOrganizacionId;
     private Long complejidadOrganizacionId;
-
     private LocalDate fechaCertificacionInicial;
     private LocalDate fechaCertificacionExpiracion;
     private String numeroCertificadoDgac;
     private String numeroResolucionAdministrativaDgac;
     private String otraResolucionClaseCertificacion;
-
     private Boolean tieneSms;
     private LocalDate fechaAceptacionInicialSms;
-
     private String estadoRegistro;
     private String usuarioCreado;
     private LocalDateTime fechaRegistro;
