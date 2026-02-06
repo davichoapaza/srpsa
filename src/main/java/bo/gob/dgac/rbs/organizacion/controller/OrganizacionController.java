@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
-import bo.gob.dgac.rbs.organizacion.dto.TipoOperacionItemDto;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
 import bo.gob.dgac.rbs.organizacion.service.OrganizacionService;
 import lombok.RequiredArgsConstructor;
@@ -46,10 +45,6 @@ public class OrganizacionController {
     
     @PostMapping
     public ResponseEntity<?>  crear(@RequestBody OrganizacionCreacionDto dto) {
-    	
-    	 
-    
-    	
     	Organizacion creado=service.crear(dto);
     	return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
     			"id",creado.getId(),

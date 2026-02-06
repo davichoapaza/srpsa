@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter @Setter
 public class ParamCargo {
 	
-	private String descripcion;
+	
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +23,5 @@ public class ParamCargo {
     @Column(unique = true, nullable = false)
     private String codigo;
 
-    
+    private String descripcion;
 }

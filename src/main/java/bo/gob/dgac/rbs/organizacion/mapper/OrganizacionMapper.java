@@ -5,25 +5,25 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
-
-import bo.gob.dgac.rbs.organizacion.dto.AeronaveDTO;
+import bo.gob.dgac.rbs.organizacion.dto.CertificacionesProgramasDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDTO;
 import bo.gob.dgac.rbs.organizacion.dto.OrganizacionDetalleDTO;
 import bo.gob.dgac.rbs.organizacion.dto.TipoOperacionItemDto;
 import bo.gob.dgac.rbs.organizacion.dto.UbicacionCreacionDto;
 import bo.gob.dgac.rbs.organizacion.modelo.Aeronaves;
+import bo.gob.dgac.rbs.organizacion.modelo.CertificacionesProgramas;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
+import bo.gob.dgac.rbs.organizacion.modelo.ParamCertificacionesProgramas;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamClaseCertificacion;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamComplejidadOrganizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamDepartamento;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamNacionalidad;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamTamanoOrganizacion;
+import bo.gob.dgac.rbs.organizacion.modelo.ParamTipoOperacion;
 import bo.gob.dgac.rbs.organizacion.modelo.ParamTipoOrganizacion;
 import bo.gob.dgac.rbs.organizacion.modelo.TipoOperacion;
 import bo.gob.dgac.rbs.organizacion.modelo.Ubicacion;
-
-
 
 
 
@@ -43,7 +43,6 @@ public interface OrganizacionMapper {
     @Mapping(target = "tamanoOrganizacion", source = "tamanoOrganizacionId", qualifiedByName = "mapTamano")
     @Mapping(target = "complejidadOrganizacion", source = "complejidadOrganizacionId", qualifiedByName = "mapComplejidad")
     Organizacion toEntity(OrganizacionDTO dto);
-
     
     @Mapping(source = "tipoOrganizacion.id", target = "tipoOrganizacionId")
     @Mapping(source = "claseCertificacion.id", target = "claseCertificacionId")
@@ -53,12 +52,7 @@ public interface OrganizacionMapper {
     @Mapping(source = "ubicaciones", target = "ubicaciones")
     OrganizacionDetalleDTO toDetalleDto(Organizacion entity);
 
-    
-    
-    
-    
-    
-   /* de ides  a entidades  */
+     /* de ides  a entidades  */
 
     @Named("mapTipo")
     default ParamTipoOrganizacion mapTipo(Long id) {
@@ -109,15 +103,39 @@ public interface OrganizacionMapper {
     @Mapping(target = "complejidadOrganizacion", source = "paramComplejidadOrganizacionId", qualifiedByName = "mapComplejidad")
 	@Mapping(target = "tipoOperacion", source = "tipos")
     Organizacion toEntity(OrganizacionCreacionDto dto);
+    
+    
 
-	 @AfterMapping
+   @AfterMapping
    default void operacion(@MappingTarget Organizacion org) {
    		for(TipoOperacion t: org.getTipoOperacion()) {
    			t.setOrganizacion(org);
    		}
 
    }
-	 @Named("mapOrganizacion")
+	 
+  @AfterMapping
+  default void certificacionesProgamas(@MappingTarget Organizacion org) {
+	     for(CertificacionesProgramas cp: org.getCertificacionesProgramas()) {
+	    	  cp.setOrganizacion(org);
+    	     }
+    }
+  
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "organizacion", ignore = true) 
+  @Mapping(target = "certificacionesProgramas", source = "certificacionProgramasId", qualifiedByName = "mapParamCertificacionesProgramas")
+  @Mapping(target = "descripcion", source = "descripcion")
+  CertificacionesProgramas toEntity(CertificacionesProgramasDto dto);
+
+  @Named("mapParamCertificacionesProgramas")
+  default ParamCertificacionesProgramas mapParamCertificacionesProgramas(Long id) {
+      if (id == null) return null;
+      ParamCertificacionesProgramas p = new ParamCertificacionesProgramas();
+      p.setId(id);
+      return p;
+  }
+
+  @Named("mapOrganizacion")
 	    default Organizacion mapOrganizacion(Long id) {
 	        if (id == null) return null;
 	        Organizacion o = new Organizacion();
@@ -159,13 +177,6 @@ public interface OrganizacionMapper {
     		
     }*/
     
-    
-    
-    
-    
-    
-      
-    
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "organizacion", ignore = true)
     @Mapping(target = "fechaRegistro", ignore = true)
@@ -189,5 +200,17 @@ public interface OrganizacionMapper {
     }
 
     
-    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "organizacion", ignore = true) 
+    @Mapping(target = "tipoOperacion", source = "tipoOperacionId", qualifiedByName = "mapParamTipoOperacion")
+    @Mapping(target = "descripcion", source = "descripcion")
+    TipoOperacion toEntity(TipoOperacionItemDto dto);
+
+    @Named("mapParamTipoOperacion")
+    default ParamTipoOperacion mapParamTipoOperacion(Long id) {
+        if (id == null) return null;
+        ParamTipoOperacion p = new ParamTipoOperacion();
+        p.setId(id);
+        return p;
+    }
 }

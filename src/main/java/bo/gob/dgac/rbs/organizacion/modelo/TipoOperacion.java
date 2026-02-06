@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,10 +25,11 @@ public class TipoOperacion {
     @JoinColumn(name = "organizacion_id")
     private Organizacion organizacion;
 
-    /*@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tipo_operacion_id")*/
-    @Column(name = "tipo_operacion_id")
-    private ParamTipoOperacion tipoOperacionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo_operacion_id")
+    private ParamTipoOperacion tipoOperacion;
+    
+    
 
     @Column(name = "descripcion")
     private String descripcion;

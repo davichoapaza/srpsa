@@ -125,8 +125,10 @@ public class Organizacion {
 // Con esto, aunque no llegue nada, getTipoOperacion() devuelve lista vacía y no revienta.
     
     
-    
-    
+    @OneToMany(mappedBy="organizacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CertificacionesProgramas> certificacionesProgramas = new ArrayList<>();
+     // con esto hacemos que si el objeto certifcacionesProgramas este e
+    // en valor nulo no pueda producir ningun error
     
     
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import bo.gob.dgac.rbs.organizacion.dto.TipoOperacionGuardarDto;
 import bo.gob.dgac.rbs.organizacion.dto.TipoOperacionItemDto;
 import bo.gob.dgac.rbs.organizacion.modelo.Organizacion;
+import bo.gob.dgac.rbs.organizacion.modelo.ParamTipoOperacion;
 import bo.gob.dgac.rbs.organizacion.modelo.TipoOperacion;
 import bo.gob.dgac.rbs.organizacion.repository.TipoOperacionRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,10 @@ public class TipoOperacionService {
         for(TipoOperacionItemDto items: dto.tipos ) {
         	TipoOperacion  t = new TipoOperacion();
         	t.setOrganizacion(org);
-        	t.setTipoOperacionId(items.tipoOperacionId);
+        	ParamTipoOperacion pto=new ParamTipoOperacion();
+        	pto.setId(items.tipoOperacionId);
+        	//t.setTipoOperacionId(pto);
+        	t.setTipoOperacion(pto);
             entities.add(t);
         	
         	
